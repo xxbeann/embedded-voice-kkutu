@@ -1,0 +1,3 @@
+[submodule "kkutu"]
+	path = kkutu
+	url = https://github.com/JJoriping/KKuTu.git
