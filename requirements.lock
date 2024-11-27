@@ -10,3 +10,19 @@
 #   universal: false
 
 -e file:.
+certifi==2024.8.30
+    # via requests
+charset-normalizer==3.4.0
+    # via requests
+click==8.1.7
+    # via gtts
+gtts==2.5.4
+    # via embedded-voice-kkutu
+idna==3.10
+    # via requests
+pydub==0.25.1
+    # via embedded-voice-kkutu
+requests==2.32.3
+    # via gtts
+urllib3==2.2.3
+    # via requests

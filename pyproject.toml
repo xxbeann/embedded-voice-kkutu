@@ -5,7 +5,10 @@ description = "Voice KKuTu: Play with voice!"
 authors = [
     { name = "Jonghyeon Park", email = "belline0124@gmail.com" }
 ]
-dependencies = []
+dependencies = [
+    "gtts>=2.5.4",
+    "pydub>=0.25.1",
+]
 readme = "README.md"
 requires-python = ">= 3.8"
 
