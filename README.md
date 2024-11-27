@@ -7,7 +7,7 @@ Voice KKuTu - Team Project for Embedded Software Lecture
 [`rye`](https://rye.astral.sh) is required for run this project easily.
 
 ```sh
-rye init
+rye sync
 ```
 
 ### Convert word data from KKuTu DB
