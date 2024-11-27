@@ -1,7 +1,8 @@
 import argparse
 from json import dumps
 
-KKUTU_SUBMODULE_PATH = './kkutu'
+PREFIX_PATH = '/src'
+KKUTU_SUBMODULE_PATH = f'.{PREFIX_PATH}/kkutu'
 ASSETS_WORDS_PATH = './assets/words.json'
 
 def load_from_kkutu_sql(path: str=f'{KKUTU_SUBMODULE_PATH}/db.sql') -> list[str]:
@@ -42,7 +43,7 @@ def dump_words(words_list: list[str]=None, words_dict: dict[str, str]=None, path
     with open(path, 'w', encoding='utf-8') as f:
         f.write(dumps(_dumping, ensure_ascii=False))
 
-if __name__ == '__main__':
+def main() -> int:
     parser = argparse.ArgumentParser(description='Convert kkutu words to json')
     parser.add_argument('--in-file', type=str, default=f'{KKUTU_SUBMODULE_PATH}/db.sql' ,help='Input file path. Default is `db.sql` in kkutu submodule. (./kkutu/db.sql)')
     parser.add_argument('--out-file', type=str, default=ASSETS_WORDS_PATH, help='Output file path. Default is `./assets/words.json`')
@@ -55,4 +56,7 @@ if __name__ == '__main__':
         dump_words(words_list=words_list, words_dict=words_dict, path=args.out_file)
     else:
         print('Only kkutu is supported for now.')
-        exit(0)
+        return 0
+
+if __name__ == '__main__':
+    main()
