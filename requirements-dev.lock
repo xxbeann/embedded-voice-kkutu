@@ -16,13 +16,22 @@ charset-normalizer==3.4.0
     # via requests
 click==8.1.7
     # via gtts
+colorama==0.4.6
+    # via click
 gtts==2.5.4
     # via embedded-voice-kkutu
 idna==3.10
     # via requests
+pyaudio==0.2.14
+    # via embedded-voice-kkutu
 pydub==0.25.1
     # via embedded-voice-kkutu
 requests==2.32.3
     # via gtts
+    # via speechrecognition
+speechrecognition==3.11.0
+    # via embedded-voice-kkutu
+typing-extensions==4.12.2
+    # via speechrecognition
 urllib3==2.2.3
     # via requests

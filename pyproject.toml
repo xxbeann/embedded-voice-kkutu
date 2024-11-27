@@ -8,6 +8,8 @@ authors = [
 dependencies = [
     "gtts>=2.5.4",
     "pydub>=0.25.1",
+    "speechrecognition>=3.11.0",
+    "pyaudio>=0.2.14",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"
