@@ -16,7 +16,8 @@ requires-python = ">= 3.8"
 
 [project.scripts]
 app = "embedded_voice_kkutu:hello"
-convert = "embedded_voice_kkutu_utils:main"
+convert = "embedded_voice_kkutu_utils:convert"
+clean = "embedded_voice_kkutu_utils:clean"
 
 [build-system]
 requires = ["hatchling"]
