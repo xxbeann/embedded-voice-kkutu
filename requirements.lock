@@ -16,8 +16,6 @@ charset-normalizer==3.4.0
     # via requests
 click==8.1.7
     # via gtts
-colorama==0.4.6
-    # via click
 gtts==2.5.4
     # via embedded-voice-kkutu
 idna==3.10

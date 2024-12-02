@@ -16,21 +16,30 @@ charset-normalizer==3.4.0
     # via requests
 click==8.1.7
     # via gtts
-colorama==0.4.6
-    # via click
+exceptiongroup==1.2.2
+    # via pytest
 gtts==2.5.4
     # via embedded-voice-kkutu
 idna==3.10
     # via requests
+iniconfig==2.0.0
+    # via pytest
+packaging==24.2
+    # via pytest
+pluggy==1.5.0
+    # via pytest
 pyaudio==0.2.14
     # via embedded-voice-kkutu
 pydub==0.25.1
     # via embedded-voice-kkutu
+pytest==8.3.4
 requests==2.32.3
     # via gtts
     # via speechrecognition
 speechrecognition==3.11.0
     # via embedded-voice-kkutu
+tomli==2.2.1
+    # via pytest
 typing-extensions==4.12.2
     # via speechrecognition
 urllib3==2.2.3
