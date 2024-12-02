@@ -25,6 +25,7 @@ This repository contains KKuTu repository as submodule.
 Word data for KKuTu server can be migrated for this project with converting script.
 
 ```sh
+git submodule init
 git submodule update
 rye run convert
 ```
