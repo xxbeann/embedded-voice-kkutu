@@ -19,7 +19,7 @@ jobs:
 
     steps:
     - name: Install system requirements
-      run: apt-get install portaudio19-dev python-all-dev
+      run: sudo apt-get install portaudio19-dev python-all-dev
     - uses: actions/checkout@v4
     - uses: eifinger/setup-rye@v4
       id: setup-rye
