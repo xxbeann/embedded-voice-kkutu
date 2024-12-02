@@ -10,6 +10,8 @@ Voice KKuTu - Team Project for Embedded Software Lecture
 rye sync
 ```
 
+If below commands are not executed sucessfully, Try `rye sync` first.
+
 **Commands**
 ```
 rye run app
@@ -24,5 +26,5 @@ Word data for KKuTu server can be migrated for this project with converting scri
 
 ```sh
 git submodule update
-rye convert
+rye run convert
 ```
