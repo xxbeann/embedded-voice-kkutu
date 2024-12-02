@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Install system requirements
+      run: apt-get install portaudio19-dev python-all-dev
     - uses: actions/checkout@v4
     - uses: eifinger/setup-rye@v4
       id: setup-rye
