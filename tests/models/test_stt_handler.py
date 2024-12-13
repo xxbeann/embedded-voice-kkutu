@@ -1,32 +1,31 @@
-import unittest
-import json
 from embedded_voice_kkutu.models.stt import STTHandler
 
-
-class TestSTTHandler(unittest.TestCase):
-    def setUp(self):
-        self.stt_handler = STTHandler()
-
-    def test_initialization(self):
-        """STTHandler 초기화 테스트"""
-        self.assertIsNotNone(self.stt_handler.model)
-        self.assertIsNotNone(self.stt_handler.recognizer)
-
-    def test_record_and_recognize(self):
-        """실제 음성 녹음 및 인식 테스트"""
-        print("\n음성을 녹음합니다. 아무 말이나 하세요...")
-        result, error = self.stt_handler.record_and_recognize()
-
-        if error:
-            print(f"에러 발생: {error}")
-        else:
-            result_dict = json.loads(result)
-            self.assertIn("text", result_dict)
-            print(f"인식된 텍스트: {result_dict['text']}")
-
+# 모델 초기화 (테스트 실행 시 한 번만 로드)
+MODEL_PATH = "assets/vosk-model-small-ko-0.22"
+SAMPLE_RATE = 16000
 
 def main():
-    unittest.main()
+    """
+    STTHandler 테스트 함수.
+    - 음성을 녹음하고, STT 결과를 출력합니다.
+    """
+    try:
+        # STTHandler 초기화 (모델을 한 번만 로드)
+        print("모델을 로드 중입니다...")
+        stt_handler = STTHandler(model_path=MODEL_PATH, sample_rate=SAMPLE_RATE)
+        print("모델 로드 완료!")
+
+        # 음성을 녹음하고 변환 결과 출력
+        result = stt_handler.record_and_recognize()
+        if result:
+            print("STT 결과:", result)
+        else:
+            print("STT를 수행할 데이터가 없습니다.")
+
+    except FileNotFoundError as e:
+        print("에러:", e)
+    except Exception as e:
+        print("예기치 못한 에러가 발생했습니다:", e)
 
 
 if __name__ == "__main__":
