@@ -79,6 +79,8 @@ pycparser==2.22
     # via cffi
 pydub==0.25.1
     # via embedded-voice-kkutu
+pygame==2.6.1
+    # via embedded-voice-kkutu
 pyparsing==3.2.0
     # via matplotlib
 python-dateutil==2.9.0.post0
