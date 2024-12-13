@@ -24,12 +24,19 @@ click==8.1.7
 colorama==0.4.6
     # via click
     # via pytest
+    # via tqdm
+contourpy==1.3.1
+    # via matplotlib
+cycler==0.12.1
+    # via matplotlib
 distlib==0.3.9
     # via virtualenv
 exceptiongroup==1.2.2
     # via pytest
 filelock==3.16.1
     # via virtualenv
+fonttools==4.55.3
+    # via matplotlib
 gtts==2.5.4
     # via embedded-voice-kkutu
 identify==2.6.3
@@ -38,15 +45,31 @@ idna==3.10
     # via requests
 iniconfig==2.0.0
     # via pytest
+joblib==1.4.2
+    # via noisereduce
+kiwisolver==1.4.7
+    # via matplotlib
+matplotlib==3.9.4
+    # via noisereduce
 mypy-extensions==1.0.0
     # via black
 nodeenv==1.9.1
     # via pre-commit
+noisereduce==3.0.3
+    # via embedded-voice-kkutu
+numpy==2.2.0
+    # via contourpy
+    # via matplotlib
+    # via noisereduce
+    # via scipy
 packaging==24.2
     # via black
+    # via matplotlib
     # via pytest
 pathspec==0.12.1
     # via black
+pillow==11.0.0
+    # via matplotlib
 platformdirs==4.3.6
     # via black
     # via virtualenv
@@ -58,17 +81,26 @@ pyaudio==0.2.14
     # via embedded-voice-kkutu
 pydub==0.25.1
     # via embedded-voice-kkutu
+pyparsing==3.2.0
+    # via matplotlib
 pytest==8.3.4
+python-dateutil==2.9.0.post0
+    # via matplotlib
 pyyaml==6.0.2
     # via pre-commit
 requests==2.32.3
     # via gtts
-    # via speechrecognition
-speechrecognition==3.11.0
+scipy==1.14.1
+    # via noisereduce
+six==1.17.0
+    # via python-dateutil
+speechrecognition==3.12.0
     # via embedded-voice-kkutu
 tomli==2.2.1
     # via black
     # via pytest
+tqdm==4.67.1
+    # via noisereduce
 typing-extensions==4.12.2
     # via black
     # via speechrecognition
