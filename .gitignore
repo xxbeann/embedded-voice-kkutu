@@ -1,5 +1,6 @@
 # Project specific
 assets/words.json
+assets/vosk-model-small-ko-0.22
 test_output.wav
 
 # Byte-compiled / optimized / DLL files
