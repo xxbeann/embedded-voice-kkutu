@@ -2,6 +2,7 @@ import os
 from gtts import gTTS
 from playsound import playsound
 
+
 # 텍스트를 음성으로 변환(TTS)하고 재생하는 핸들러 클래스
 class TTSHandler:
 
