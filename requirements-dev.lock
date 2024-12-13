@@ -14,6 +14,8 @@ black==24.10.0
     # via embedded-voice-kkutu
 certifi==2024.8.30
     # via requests
+cffi==1.17.1
+    # via vosk
 cfgv==3.4.0
     # via pre-commit
 charset-normalizer==3.4.0
@@ -79,6 +81,8 @@ pre-commit==4.0.1
     # via embedded-voice-kkutu
 pyaudio==0.2.14
     # via embedded-voice-kkutu
+pycparser==2.22
+    # via cffi
 pydub==0.25.1
     # via embedded-voice-kkutu
 pyparsing==3.2.0
@@ -90,17 +94,21 @@ pyyaml==6.0.2
     # via pre-commit
 requests==2.32.3
     # via gtts
+    # via vosk
 scipy==1.14.1
     # via noisereduce
 six==1.17.0
     # via python-dateutil
 speechrecognition==3.12.0
     # via embedded-voice-kkutu
+srt==3.5.3
+    # via vosk
 tomli==2.2.1
     # via black
     # via pytest
 tqdm==4.67.1
     # via noisereduce
+    # via vosk
 typing-extensions==4.12.2
     # via black
     # via speechrecognition
@@ -108,3 +116,7 @@ urllib3==2.2.3
     # via requests
 virtualenv==20.28.0
     # via pre-commit
+vosk==0.3.45
+    # via embedded-voice-kkutu
+websockets==14.1
+    # via vosk
