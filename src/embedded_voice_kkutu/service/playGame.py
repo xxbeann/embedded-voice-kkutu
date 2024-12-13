@@ -1,6 +1,7 @@
 import json
 from typing import Dict, List, Set, Optional
 
+
 def load_word_dictionary() -> Dict[str, List[str]]:
     try:
         with open("assets/words.json", "r", encoding="utf-8") as f:
@@ -9,6 +10,7 @@ def load_word_dictionary() -> Dict[str, List[str]]:
     except Exception as e:
         print(f"단어 딕셔너리 로드 실패: {e}")
         return {}
+
 
 class WordChainGame:
     def __init__(self):
@@ -19,14 +21,16 @@ class WordChainGame:
         # 첫 단어가 아닐 경우 이전 단어 마지막 글자와 입력 첫 글자가 같은 지 확인
         if current_word is not None:
             if current_word[-1] != word[0]:
-                print(f"이전 단어의 마지막 글자 '{current_word[-1]}'로 시작해야 합니다.")
+                print(
+                    f"이전 단어의 마지막 글자 '{current_word[-1]}'로 시작해야 합니다."
+                )
                 return False
 
         # 사전에 있는 단어인지 확인
         if word[0] not in self.words_dict or word not in self.words_dict[word[0]]:
             print("사전에 없는 단어입니다.")
             return False
-        
+
         # 이미 사용한 단어인지 확인
         if word in self.used_words:
             print("이미 사용한 단어입니다.")
