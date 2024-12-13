@@ -13,13 +13,13 @@ permissions:
   contents: read
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
     steps:
     - name: Install system requirements
       run: sudo apt-get install portaudio19-dev python3-all-dev
+    - run: sudo apt-get -y install --no-install-recommends clang python-clang
+      if: env.ACT
     - uses: actions/checkout@v4
     - uses: eifinger/setup-rye@v4
       id: setup-rye
@@ -27,3 +27,18 @@ jobs:
     - name: Test with pytest
       run: |
         rye run py.test
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - run: sudo apt-get -y install --no-install-recommends clang python-clang
+      if: env.ACT
+    - uses: eifinger/setup-rye@v4
+      id: setup-rye
+    - run: rye sync --no-lock
+    - uses: psf/black@stable
+      with:
+        options: "--check --verbose"
+        use_pyproject: true
+    - run:
+        
