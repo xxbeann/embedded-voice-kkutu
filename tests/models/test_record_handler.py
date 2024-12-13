@@ -8,7 +8,7 @@ def save_to_wav_file(frames, filename, channels, rate):
         wf.setnchannels(channels)
         wf.setsampwidth(2)  # pyaudio.paInt16은 2바이트
         wf.setframerate(rate)
-        wf.writeframes(b''.join(frames))
+        wf.writeframes(b"".join(frames))
 
 
 def main():

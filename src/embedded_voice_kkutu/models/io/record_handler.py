@@ -38,12 +38,14 @@ class RecordHandler:
         초기 무음 지속 시 녹음을 종료.
         """
         p = pyaudio.PyAudio()
-        stream = p.open(format=self.FORMAT,
-                        channels=self.CHANNELS,
-                        rate=self.RATE,
-                        input=True,
-                        frames_per_buffer=self.CHUNK)
-        
+        stream = p.open(
+            format=self.FORMAT,
+            channels=self.CHANNELS,
+            rate=self.RATE,
+            input=True,
+            frames_per_buffer=self.CHUNK,
+        )
+
         frames = []
         silent_chunks = 0
         is_speaking = False
@@ -51,7 +53,7 @@ class RecordHandler:
 
         while True:
             data = stream.read(self.CHUNK)
-            array_data = array('h', data)
+            array_data = array("h", data)
 
             # 데이터 유효성 검사
             if not self.validate_data(array_data):
@@ -64,7 +66,10 @@ class RecordHandler:
             rms = self.calculate_rms(float_data)
 
             # 초기 무음 상태 체크
-            if not is_speaking and time.time() - initial_silence_start > self.INITIAL_SILENCE_DURATION:
+            if (
+                not is_speaking
+                and time.time() - initial_silence_start > self.INITIAL_SILENCE_DURATION
+            ):
                 break
 
             # 입력 음성이 무음 기준값을 초과하면 녹음 시작
@@ -84,5 +89,5 @@ class RecordHandler:
         stream.stop_stream()
         stream.close()
         p.terminate()
-        
+
         return frames
