@@ -7,7 +7,18 @@ Voice KKuTu - Team Project for Embedded Software Lecture
 [`rye`](https://rye.astral.sh) is required for run this project easily.
 
 ```sh
+# Fetch KKuTu Repository
+git module init
+git module update
+
+# Install dependencies
 rye sync
+
+# Convert word database from KKuTu DB
+rye run convert
+
+# Install pre commit script for linting
+rye run pre-commit
 ```
 
 If below commands are not executed sucessfully, Try `rye sync` first.
@@ -17,6 +28,8 @@ If below commands are not executed sucessfully, Try `rye sync` first.
 rye run app
 rye run convert
 rye run clean
+rye run black
+rye run pre-commit
 ```
 
 ### Convert word data from KKuTu DB
