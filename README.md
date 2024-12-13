@@ -63,6 +63,14 @@ Install portaudio
 sudo apt-get install portaudio19-dev  
 ```
 
+### ModuleNotFoundError: No module name 'gi'
+```sh
+sudo apt update
+sudo apt install -y python3-gi python3-gi-cairo gir1.2-gtk-3.0
+rye add PyGObject
+```
+
+
 ## Raspberry Pi Setting
 
 ### Audio Activation
@@ -74,7 +82,6 @@ remove comments from `boot/config.txt`
 
 ```sh
 sudo /etc/init.d/alsa-utils reset
-
 sudo reboot
 ```
 
@@ -89,6 +96,5 @@ System Options > Audio > [choose the audio output]
 Run TTS
 ```sh
 sudo apt-get install espeak
-
 espeak "hello"
 ```

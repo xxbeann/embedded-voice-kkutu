@@ -2,6 +2,7 @@
 assets/words.json
 assets/vosk-model-small-ko-0.22
 test_output.wav
+temp_tts.mp3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
