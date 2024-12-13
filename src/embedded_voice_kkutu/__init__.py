@@ -1,26 +1,34 @@
 import json
-from typing import Dict, List
-
-
-def load_word_dictionary() -> Dict[str, List[str]]:
-    try:
-        with open("assets/words.json", "r", encoding="utf-8") as f:
-            data = json.load(f)
-
-            return data
-    except Exception as e:
-        print(f"단어 사전 로드 실패: {e}")
-        return {}
+from typing import Dict, List, Set
+from .service.playGame import WordChainGame
 
 
 def hello() -> str:
-    word_dict = load_word_dictionary()
+    game = WordChainGame()
+    next_word = None
 
-    if "words_list" in word_dict:
-        words = word_dict["words_list"]
-        print(f"단어 데이터 로드 완료: {len(words)}개의 단어를 불러왔습니다.")
-        print("단어 예시:", words[:5])
-    else:
-        print("단어 목록을 찾을 수 없습니다.")
+    print("끝말잇기를 시작합니다! 게임을 종료하려면 '종료'를 입력하세요.")
+    player_word = input("첫 단어를 입력하세요: ").strip()
+
+    while True:
+        if player_word == "종료":
+            print("게임을 종료합니다!")
+            break
+
+        # 플레이어 입력 단어가 유효한지 확인
+        if not game.is_valid_word(next_word, player_word):
+            player_word = input("단어를 다시 입력하세요: ").strip()
+            continue
+
+        # 플레이어 단어 등록
+        game.used_words.add(player_word)
+
+        # 컴퓨터 응답
+        next_word = game.play_turn(player_word)
+        if next_word is None:
+            print("축하합니다! 당신이 이겼어용!!")
+            break
+
+        player_word = input(f"단어를 입력하세요: ").strip()
 
     return "Hello from embedded-voice-kkutu!!"
