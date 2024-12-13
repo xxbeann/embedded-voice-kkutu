@@ -69,6 +69,8 @@ pillow==11.0.0
 platformdirs==4.3.6
     # via black
     # via virtualenv
+playsound==1.2.2
+    # via embedded-voice-kkutu
 pre-commit==4.0.1
     # via embedded-voice-kkutu
 pyaudio==0.2.14
