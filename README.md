@@ -42,3 +42,23 @@ git submodule init
 git submodule update
 rye run convert
 ```
+
+## Troubleshooting
+
+### fatal error: 'portaudio.h' file not found
+
+```
+[stderr]
+src/pyaudio/device_api.c:9:10: fatal error: 'portaudio.h' file not found
+    9 | #include "portaudio.h"
+      |          ^~~~~~~~~~~~~
+1 error generated.
+error: command '/usr/bin/clang' failed with exit code 1
+
+hint: This error likely indicates that you need to install a library that provides "portaudio.h" for `pyaudio@0.2.14`
+```
+
+Install portaudio
+```sh
+sudo apt-get install portaudio19-dev  
+```
