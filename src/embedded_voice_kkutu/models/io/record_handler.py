@@ -1,10 +1,12 @@
 import pyaudio
 from array import array
 from math import sqrt
-import time  # 타이머 추가
+import time
 
 
 class RecordHandler:
+    """오디오 녹음을 처리하는 핸들러 클래스"""
+
     CHUNK = 1024  # 오디오 데이터 버퍼 크기
     FORMAT = pyaudio.paInt16  # 오디오 포맷
     CHANNELS = 1  # 모노
@@ -31,7 +33,10 @@ class RecordHandler:
         return True
 
     def record_until_silence(self):
-        """사용자의 음성을 녹음하고, 무음 기준값을 초과하는 데이터만 기록"""
+        """
+        사용자 음성을 녹음하고, 무음 기준값을 초과하는 데이터만 기록.
+        초기 무음 지속 시 녹음을 종료.
+        """
         p = pyaudio.PyAudio()
         stream = p.open(
             format=self.FORMAT,
@@ -41,12 +46,9 @@ class RecordHandler:
             frames_per_buffer=self.CHUNK,
         )
 
-        print("Listening... Speak now!")
-
         frames = []
         silent_chunks = 0
         is_speaking = False
-        start_time = time.time()  # 녹음 시작 시간 기록
         initial_silence_start = time.time()  # 초기 무음 감지 시작 시간
 
         while True:
@@ -55,7 +57,6 @@ class RecordHandler:
 
             # 데이터 유효성 검사
             if not self.validate_data(array_data):
-                print("Invalid data detected, skipping...")
                 continue
 
             # 데이터를 float으로 변환하여 오버플로우 방지
@@ -64,39 +65,27 @@ class RecordHandler:
             # RMS 에너지 계산
             rms = self.calculate_rms(float_data)
 
-            # 실시간으로 RMS 값과 무음 기준값 비교 출력
-            print(f"RMS: {rms:.2f}, Threshold: {self.SILENCE_THRESHOLD}")
-
             # 초기 무음 상태 체크
             if (
                 not is_speaking
                 and time.time() - initial_silence_start > self.INITIAL_SILENCE_DURATION
             ):
-                print(
-                    "No speech detected within the initial silence duration. Stopping recording..."
-                )
                 break
 
             # 입력 음성이 무음 기준값을 초과하면 녹음 시작
             if rms > self.SILENCE_THRESHOLD:
                 is_speaking = True
-                silent_chunks = 0
+                silent_chunks = 0  # 무음 카운터 초기화
                 frames.append(data)
-                print("Speaking detected...")
-
-            # 무음 상태가 일정 시간 지속되면 녹음 종료
+            # 무음 상태가 지속되면 녹음 종료
             elif is_speaking:
                 frames.append(data)
                 silent_chunks += 1
-                print("Silence detected...")
 
                 if silent_chunks > self.SILENCE_CHUNKS:
-                    print("Silence duration exceeded. Stopping recording...")
                     break
 
-        print("Done recording")
-
-        # 녹음 종료
+        # 스트림 종료
         stream.stop_stream()
         stream.close()
         p.terminate()
