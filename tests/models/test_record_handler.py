@@ -15,7 +15,7 @@ if __name__ == "__main__":
     if len(frames) > 0:
         print(f"녹음 성공! 총 {len(frames)}개의 오디오 프레임이 캡처되었습니다.")
 
-            # 녹음된 데이터를 WAV 파일로 저장
+        # 녹음된 데이터를 WAV 파일로 저장
         with wave.open("test_output.wav", "wb") as wf:
             wf.setnchannels(handler.CHANNELS)
             wf.setsampwidth(2)  # pyaudio.paInt16은 2바이트
