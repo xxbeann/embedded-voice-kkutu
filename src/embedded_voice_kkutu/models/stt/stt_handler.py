@@ -12,6 +12,7 @@ if not os.path.exists(MODEL_PATH):
 model = Model(MODEL_PATH)
 recognizer = KaldiRecognizer(model, 16000)  # 샘플 레이트 16kHz로 설정
 
+
 # Step 2: Frames 데이터를 Vosk 모델에 넣기
 def recognize_audio(frames, rate=16000):
 
