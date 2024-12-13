@@ -1,5 +1,6 @@
 import speech_recognition as sr
 
+
 def recognize_speech_from_mic():
     # Recognizer와 Microphone 객체 생성
     recognizer = sr.Recognizer()
@@ -25,6 +26,7 @@ def recognize_speech_from_mic():
         print(f"Google Speech Recognition 서비스에 접근할 수 없습니다: {e}")
     except Exception as e:
         print(f"오류 발생: {e}")
+
 
 if __name__ == "__main__":
     recognize_speech_from_mic()

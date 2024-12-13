@@ -18,8 +18,6 @@ jobs:
     steps:
     - name: Install system requirements
       run: sudo apt-get install portaudio19-dev python3-all-dev
-    - run: sudo apt-get -y install --no-install-recommends clang python-clang
-      if: env.ACT
     - uses: actions/checkout@v4
     - uses: eifinger/setup-rye@v4
       id: setup-rye
@@ -31,14 +29,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - run: sudo apt-get -y install --no-install-recommends clang python-clang
-      if: env.ACT
     - uses: eifinger/setup-rye@v4
       id: setup-rye
     - run: rye sync --no-lock
-    - uses: psf/black@stable
-      with:
-        options: "--check --verbose"
-        use_pyproject: true
-    - run:
-        
+    - name: Run Black
+      run: |
+        rye run black .
+    - name: Commit changes
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git commit -am "Apply Black formatting" || echo "No changes to commit"
+        git push
