@@ -10,9 +10,9 @@ class RecordHandler:
     CHUNK = 1024  # 오디오 데이터 버퍼 크기
     FORMAT = pyaudio.paInt16  # 오디오 포맷
     CHANNELS = 1  # 모노
-    RATE = 44100  # 샘플링 레이트
+    RATE = 16000  # 샘플링 레이트
     SILENCE_THRESHOLD = 1000  # 무음 기준 볼륨
-    SILENCE_CHUNKS = 30  # 무음 지속 길이
+    SILENCE_CHUNKS = 5  # 무음 지속 길이
     INITIAL_SILENCE_DURATION = 5  # 초기 무음 허용 시간 (초)
 
     def calculate_rms(self, data):
