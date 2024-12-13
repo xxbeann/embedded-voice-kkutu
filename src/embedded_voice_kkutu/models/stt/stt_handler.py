@@ -4,7 +4,7 @@ from vosk import Model, KaldiRecognizer
 from embedded_voice_kkutu.models.io import RecordHandler  # RecordHandler를 불러옵니다.
 
 # Step 1: Vosk 모델 초기화 (모델 파일 경로를 지정하세요)
-MODEL_PATH = "assets\vosk-model-small-ko-0.22"  # 다운로드한 모델 폴더 경로 지정
+MODEL_PATH = "assets/vosk-model-small-ko-0.22"  # 다운로드한 모델 폴더 경로 지정
 if not os.path.exists(MODEL_PATH):
     print(f"모델 경로가 올바르지 않습니다: {MODEL_PATH}")
     sys.exit(1)
