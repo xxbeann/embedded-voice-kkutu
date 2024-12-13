@@ -2,6 +2,7 @@ import os
 from vosk import Model, KaldiRecognizer
 from embedded_voice_kkutu.models.io import RecordHandler  # RecordHandler를 불러옵니다.
 
+
 class STTHandler:
     """음성 인식(STT)을 처리하는 핸들러 클래스"""
 
@@ -19,7 +20,7 @@ class STTHandler:
 
         if not os.path.exists(self.model_path):
             raise FileNotFoundError(f"모델 경로가 올바르지 않습니다: {self.model_path}")
-        
+
         self.model = Model(self.model_path)
         self.recognizer = KaldiRecognizer(self.model, self.sample_rate)
 

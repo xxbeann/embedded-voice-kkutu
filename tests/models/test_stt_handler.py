@@ -4,6 +4,7 @@ from embedded_voice_kkutu.models.stt import STTHandler
 MODEL_PATH = "assets/vosk-model-small-ko-0.22"
 SAMPLE_RATE = 16000
 
+
 def main():
     """
     STTHandler 테스트 함수.
