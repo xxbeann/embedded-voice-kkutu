@@ -33,6 +33,7 @@ dev-dependencies = [
 ]
 
 [tool.rye.scripts]
+pre-commit = "rye run pre-commit install"
 
 [tool.hatch.metadata]
 allow-direct-references = true
