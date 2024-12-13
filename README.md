@@ -62,3 +62,33 @@ Install portaudio
 ```sh
 sudo apt-get install portaudio19-dev  
 ```
+
+## Raspberry Pi Setting
+
+### Audio Activation
+```
+# Enable auido (loads snd_bcm2835)
+dtparam=audio=on
+```
+remove comments from `boot/config.txt`
+
+```sh
+sudo /etc/init.d/alsa-utils reset
+
+sudo reboot
+```
+
+
+### Audio Output
+```sh
+sudo raspi-config
+```
+System Options > Audio > [choose the audio output]
+
+### Audio Output Test
+Run TTS
+```sh
+sudo apt-get install espeak
+
+espeak "hello"
+```
