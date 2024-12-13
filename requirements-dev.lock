@@ -16,6 +16,9 @@ charset-normalizer==3.4.0
     # via requests
 click==8.1.7
     # via gtts
+colorama==0.4.6
+    # via click
+    # via pytest
 exceptiongroup==1.2.2
     # via pytest
 gtts==2.5.4
