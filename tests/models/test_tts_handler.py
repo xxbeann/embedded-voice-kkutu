@@ -7,11 +7,11 @@ def main():
     tts_handler = TTSHandler()
 
     # # 텍스트를 음성으로 출력
-    # tts_handler.text_to_speech("안녕하세요. TTS 핸들러입니다.")
+    tts_handler.text_to_speech("안녕하세요. TTS 핸들러입니다.")
 
     # 언어를 영어로 변경 후 테스트
-    tts_handler.set_language("en")
-    tts_handler.text_to_speech("Hello, this is a TTS handler.")
+    # tts_handler.set_language("en")
+    # tts_handler.text_to_speech("Hello, this is a TTS handler.")
 
 
 if __name__ == "__main__":

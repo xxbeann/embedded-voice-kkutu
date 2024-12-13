@@ -63,14 +63,6 @@ Install portaudio
 sudo apt-get install portaudio19-dev  
 ```
 
-### ModuleNotFoundError: No module name 'gi'
-```sh
-sudo apt update
-sudo apt install -y build-essential libcairo2-dev libgirepository1.0-dev gir1.2-gtk-3.0 python3-dev
-rye add PyGObject
-```
-
-
 ## Raspberry Pi Setting
 
 ### Audio Activation
