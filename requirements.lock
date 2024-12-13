@@ -18,19 +18,53 @@ click==8.1.7
     # via gtts
 colorama==0.4.6
     # via click
+    # via tqdm
+contourpy==1.3.1
+    # via matplotlib
+cycler==0.12.1
+    # via matplotlib
+fonttools==4.55.3
+    # via matplotlib
 gtts==2.5.4
     # via embedded-voice-kkutu
 idna==3.10
     # via requests
+joblib==1.4.2
+    # via noisereduce
+kiwisolver==1.4.7
+    # via matplotlib
+matplotlib==3.9.4
+    # via noisereduce
+noisereduce==3.0.3
+    # via embedded-voice-kkutu
+numpy==2.2.0
+    # via contourpy
+    # via matplotlib
+    # via noisereduce
+    # via scipy
+packaging==24.2
+    # via matplotlib
+pillow==11.0.0
+    # via matplotlib
 pyaudio==0.2.14
     # via embedded-voice-kkutu
 pydub==0.25.1
     # via embedded-voice-kkutu
+pyparsing==3.2.0
+    # via matplotlib
+python-dateutil==2.9.0.post0
+    # via matplotlib
 requests==2.32.3
     # via gtts
     # via speechrecognition
+scipy==1.14.1
+    # via noisereduce
+six==1.17.0
+    # via python-dateutil
 speechrecognition==3.11.0
     # via embedded-voice-kkutu
+tqdm==4.67.1
+    # via noisereduce
 typing-extensions==4.12.2
     # via speechrecognition
 urllib3==2.2.3
