@@ -1,20 +1,13 @@
-from embedded_voice_kkutu.models.stt import STTHandler
+from embedded_voice_kkutu.models.stt import STTHandler  # 수정된 STTHandler를 불러옵니다.
 
-# 모델 초기화 (테스트 실행 시 한 번만 로드)
-MODEL_PATH = "assets/vosk-model-small-ko-0.22"
-SAMPLE_RATE = 16000
-
-
+# STTHandler 테스트 함수
 def main():
-    """
-    STTHandler 테스트 함수.
-    - 음성을 녹음하고, STT 결과를 출력합니다.
-    """
+
     try:
-        # STTHandler 초기화 (모델을 한 번만 로드)
-        print("모델을 로드 중입니다...")
-        stt_handler = STTHandler(model_path=MODEL_PATH, sample_rate=SAMPLE_RATE)
-        print("모델 로드 완료!")
+        # STTHandler 초기화 (Whisper 모델 로드)
+        print("Whisper 모델을 로드 중입니다...")
+        stt_handler = STTHandler(model_name="base")  # Whisper 모델 이름 지정 ("tiny", "base", "small", etc.)
+        print("Whisper 모델 로드 완료!")
 
         # 음성을 녹음하고 변환 결과 출력
         result = stt_handler.record_and_recognize()

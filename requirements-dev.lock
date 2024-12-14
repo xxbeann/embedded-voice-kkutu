@@ -12,13 +12,13 @@
 -e file:.
 black==24.10.0
     # via embedded-voice-kkutu
-certifi==2024.8.30
+certifi==2022.12.7
     # via requests
 cffi==1.17.1
     # via vosk
 cfgv==3.4.0
     # via pre-commit
-charset-normalizer==3.4.0
+charset-normalizer==2.1.1
     # via requests
 click==8.1.7
     # via black
@@ -35,43 +35,66 @@ distlib==0.3.9
     # via virtualenv
 exceptiongroup==1.2.2
     # via pytest
-filelock==3.16.1
+filelock==3.13.1
+    # via torch
     # via virtualenv
 fonttools==4.55.3
     # via matplotlib
+fsspec==2024.2.0
+    # via torch
 gtts==2.5.4
     # via embedded-voice-kkutu
 identify==2.6.3
     # via pre-commit
-idna==3.10
+idna==3.4
     # via requests
 iniconfig==2.0.0
     # via pytest
+jinja2==3.1.3
+    # via torch
 joblib==1.4.2
     # via noisereduce
 kiwisolver==1.4.7
     # via matplotlib
+llvmlite==0.43.0
+    # via numba
+markupsafe==2.1.5
+    # via jinja2
 matplotlib==3.9.4
     # via noisereduce
+more-itertools==10.5.0
+    # via openai-whisper
+mpmath==1.3.0
+    # via sympy
 mypy-extensions==1.0.0
     # via black
+networkx==3.2.1
+    # via torch
 nodeenv==1.9.1
     # via pre-commit
 noisereduce==3.0.3
     # via embedded-voice-kkutu
-numpy==2.2.0
+numba==0.60.0
+    # via openai-whisper
+numpy==1.26.3
     # via contourpy
     # via matplotlib
     # via noisereduce
+    # via numba
+    # via openai-whisper
     # via scipy
-packaging==24.2
+    # via torchvision
+openai-whisper==20240930
+    # via embedded-voice-kkutu
+packaging==24.1
     # via black
     # via matplotlib
     # via pytest
 pathspec==0.12.1
     # via black
-pillow==11.0.0
+pillow==10.2.0
     # via matplotlib
+    # via torchvision
 platformdirs==4.3.6
     # via black
     # via virtualenv
@@ -96,27 +119,46 @@ python-dateutil==2.9.0.post0
     # via matplotlib
 pyyaml==6.0.2
     # via pre-commit
-requests==2.32.3
+regex==2024.11.6
+    # via tiktoken
+requests==2.28.1
     # via gtts
+    # via tiktoken
     # via vosk
 scipy==1.14.1
     # via noisereduce
 six==1.17.0
     # via python-dateutil
+    # via whisper
 speechrecognition==3.12.0
     # via embedded-voice-kkutu
 srt==3.5.3
     # via vosk
+sympy==1.13.1
+    # via torch
+tiktoken==0.8.0
+    # via openai-whisper
 tomli==2.2.1
     # via black
     # via pytest
-tqdm==4.67.1
+torch==2.5.1+cpu
+    # via embedded-voice-kkutu
+    # via openai-whisper
+    # via torchaudio
+    # via torchvision
+torchaudio==2.5.1+cpu
+    # via embedded-voice-kkutu
+torchvision==0.20.1+cpu
+    # via embedded-voice-kkutu
+tqdm==4.66.5
     # via noisereduce
+    # via openai-whisper
     # via vosk
-typing-extensions==4.12.2
+typing-extensions==4.9.0
     # via black
     # via speechrecognition
-urllib3==2.2.3
+    # via torch
+urllib3==1.26.13
     # via requests
 virtualenv==20.28.0
     # via pre-commit
@@ -124,3 +166,5 @@ vosk==0.3.45
     # via embedded-voice-kkutu
 websockets==14.1
     # via vosk
+whisper==1.1.10
+    # via embedded-voice-kkutu
