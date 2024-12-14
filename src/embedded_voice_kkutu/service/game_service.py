@@ -3,6 +3,7 @@ from typing import Dict, List, Set, Optional
 from embedded_voice_kkutu.models.ko_kr import KoKrSupport
 from random import sample
 
+
 def load_word_dictionary() -> Dict[str, List[str]]:
     try:
         with open("assets/words.json", "r", encoding="utf-8") as f:
@@ -25,11 +26,13 @@ class WordChainGame:
             init_law_applied = KoKrSupport.init_law_char(current_word[-1])
             if init_law_applied != current_word[-1]:
                 ables.append(init_law_applied)
-            
+
             if word[0] not in ables:
                 print(
                     "이전 단어의 마지막 글자 {}로 시작해야 합니다.".format(
-                        ables[0] if len(ables) == 1 else f"{ables[0]} 또는 {', '.join(ables[1:])}"
+                        ables[0]
+                        if len(ables) == 1
+                        else f"{ables[0]} 또는 {', '.join(ables[1:])}"
                     )
                 )
                 return False
@@ -52,11 +55,13 @@ class WordChainGame:
             possible_words = possible_words.union(set(self.words_dict[last_letter]))
         init_law_applied = KoKrSupport.init_law_char(last_letter)
         if init_law_applied != last_letter and init_law_applied in self.words_dict:
-            possible_words = possible_words.union(set(self.words_dict[init_law_applied]))
+            possible_words = possible_words.union(
+                set(self.words_dict[init_law_applied])
+            )
 
         remains = len(possible_words)
         rejected = set()
-        
+
         while remains > len(rejected):
             word = sample(possible_words, 1)
             if len(word) == 0:
