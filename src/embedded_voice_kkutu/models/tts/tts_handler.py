@@ -25,13 +25,17 @@ class TTSHandler:
         temp_file = "temp_tts.mp3"
         tts.save(temp_file)
 
-        # MP3 파일 재생
-        pygame.mixer.music.load(temp_file)
-        pygame.mixer.music.play()
+        try:
+            # MP3 파일 재생
+            pygame.mixer.music.load(temp_file)
+            pygame.mixer.music.play()
 
-        # 오디오가 끝날 때까지 대기
-        while pygame.mixer.music.get_busy():
-            pygame.time.Clock().tick(10)
+            # 오디오가 끝날 때까지 대기
+            while pygame.mixer.music.get_busy():
+                pygame.time.Clock().tick(10)
 
-        # 임시 파일 삭제
-        os.remove(temp_file)
+        finally:
+            # 파일 사용 해제 및 삭제
+            pygame.mixer.music.unload()  # 파일 사용 해제
+            if os.path.exists(temp_file):
+                os.remove(temp_file)
