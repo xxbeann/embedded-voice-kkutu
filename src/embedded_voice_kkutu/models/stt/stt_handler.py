@@ -2,11 +2,12 @@ import whisper
 import wave
 from embedded_voice_kkutu.models.io import RecordHandler
 
+
 # 음성 인식(STT)을 처리하는 핸들러 클래스 (Whisper 사용)
 class STTHandler:
 
     # Whisper 모델 (tiny, base, small, medium, large 중 선택)
-    DEFAULT_MODEL_NAME = "base"  
+    DEFAULT_MODEL_NAME = "base"
 
     # STTHandler 초기화 - model_name: Whisper 모델 이름 (기본값: DEFAULT_MODEL_NAME)
     def __init__(self, model_name=None):
