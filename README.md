@@ -63,6 +63,15 @@ Install portaudio
 sudo apt-get install portaudio19-dev  
 ```
 
+
+### Warning: When Run in Raspberry Pi
+To install PyTorch on a Raspberry Pi, you need to install the CPU-only version. You can do so using the following command:
+```sh
+pip install torch torchvision torchaudio --index-url <https://download.pytorch.org/whl/cpu>
+
+```
+
+
 ## Raspberry Pi Setting
 
 ### Audio Activation
