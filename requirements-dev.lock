@@ -103,6 +103,7 @@ scipy==1.14.1
     # via noisereduce
 six==1.17.0
     # via python-dateutil
+    # via whisper
 speechrecognition==3.12.0
     # via embedded-voice-kkutu
 srt==3.5.3
@@ -124,3 +125,5 @@ vosk==0.3.45
     # via embedded-voice-kkutu
 websockets==14.1
     # via vosk
+whisper==1.1.10
+    # via embedded-voice-kkutu
