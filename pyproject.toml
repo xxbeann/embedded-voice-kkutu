@@ -21,7 +21,7 @@ readme = "README.md"
 requires-python = ">= 3.8"
 
 [project.scripts]
-app = "embedded_voice_kkutu:hello"
+app = "embedded_voice_kkutu:app"
 convert = "embedded_voice_kkutu_utils:convert"
 clean = "embedded_voice_kkutu_utils:clean"
 
