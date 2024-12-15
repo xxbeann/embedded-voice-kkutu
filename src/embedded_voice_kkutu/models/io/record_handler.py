@@ -11,6 +11,7 @@ os.environ["ALSA_CARD"] = "default"
 
 is_adjust_mode = bool("ADJUST_MODE" in os.environ and os.environ["ADJUST_MODE"])
 
+
 class RecordHandler:
     """오디오 녹음을 처리하는 핸들러 클래스"""
 
@@ -21,7 +22,7 @@ class RecordHandler:
     SILENCE_THRESHOLD = 100  # 무음 기준 볼륨
     SILENCE_CHUNKS = 5  # 무음 지속 길이
     INITIAL_SILENCE_DURATION = 5  # 초기 무음 허용 시간 (초)
-    RECORD_PREVIOUS_TEMP_TIME = .5  # 이전 녹음 시간
+    RECORD_PREVIOUS_TEMP_TIME = 0.5  # 이전 녹음 시간
 
     def calculate_rms(self, data):
         """RMS 에너지 계산: 데이터의 평균 에너지를 계산"""
@@ -76,11 +77,14 @@ class RecordHandler:
                 rms = self.calculate_rms(float_data)
 
                 # 초기 무음 상태 체크
-                if is_adjust_mode: 
+                if is_adjust_mode:
                     print(is_speaking, rms, self.SILENCE_THRESHOLD)
                 if not is_speaking:
                     previous_frames.append(data)
-                    if time.time() - initial_silence_start > self.INITIAL_SILENCE_DURATION:
+                    if (
+                        time.time() - initial_silence_start
+                        > self.INITIAL_SILENCE_DURATION
+                    ):
                         break
                     if rms > self.SILENCE_THRESHOLD:
                         is_speaking = True
@@ -103,21 +107,23 @@ class RecordHandler:
         # 스트림 종료
         stream.stop_stream()
         stream.close()
-        
+
         if is_adjust_mode:
             import wave
             from datetime import datetime
             from pathlib import Path
-            Path('.out').mkdir(parents=True, exist_ok=True)
-            wf = wave.open(f'.out/{datetime.now()}.tmp.wav', 'wb')
+
+            Path(".out").mkdir(parents=True, exist_ok=True)
+            wf = wave.open(f".out/{datetime.now()}.tmp.wav", "wb")
             wf.setnchannels(self.CHANNELS)
             wf.setsampwidth(p.get_sample_size(self.FORMAT))
             wf.setframerate(self.RATE)
-            wf.writeframes(b''.join(frames))
+            wf.writeframes(b"".join(frames))
             wf.close()
 
         p.terminate()
         return frames
+
 
 if __name__ == "__main__":
     record_handler = RecordHandler()

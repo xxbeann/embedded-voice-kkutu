@@ -60,27 +60,27 @@ class ConcurrencyIO:
     def start_audio_record(self):
         while not self.close_event.is_set():
             frames: list = self.record_handler.record_until_silence()
-            
-            audio_data = np.frombuffer(b''.join(frames), dtype=np.int16)
+
+            audio_data = np.frombuffer(b"".join(frames), dtype=np.int16)
             audio_data = audio_data.astype(np.float32)
             if len(audio_data) > 0:
                 audio_data = audio_data / 32768.0
-            
+
             data = self.transcribe.inference(
                 audio_data,
                 wc2.wmc.task,
                 wc2.wmc.language,
                 wc2.wmc.options,
             )
-            
+
             if self.audio_record_callback and False:
                 data = self.audio_record_callback(frames)
 
-            if 'text' not in data:
+            if "text" not in data:
                 continue
-            if data['text'] == "":
+            if data["text"] == "":
                 continue
-            data = data['text'].replace(' ', '')
+            data = data["text"].replace(" ", "")
 
             self.record_result.append(RecordStruct(RecordType.audio_record, data))
             self.event.set()

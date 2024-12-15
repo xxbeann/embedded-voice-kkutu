@@ -5,6 +5,7 @@ from .transcribe import Transcribe
 from .config import WhisperModelConfig as wmc
 from .utils import validate_model_directory
 
+
 def load_from_file():
     model_dir = validate_model_directory(wmc.model_directory)
 
@@ -28,6 +29,7 @@ def load_from_file():
     )
     return result
 
+
 def load_from_buffer():
     model_dir = validate_model_directory(wmc.model_directory)
 
@@ -43,11 +45,11 @@ def load_from_buffer():
         wmc.batch_size,
     )
 
-    with wave.open(wmc.audio, 'rb') as wav_file:
+    with wave.open(wmc.audio, "rb") as wav_file:
         audio_bytes = wav_file.readframes(wav_file.getnframes())
-        
+
         audio_data = np.frombuffer(audio_bytes, dtype=np.int16)
-        
+
         audio_data = audio_data.astype(np.float32)
         if len(audio_data) > 0:
             audio_data = audio_data / 32768.0

@@ -7,11 +7,15 @@ from faster_whisper import BatchedInferencePipeline, WhisperModel
 system_encoding = sys.getdefaultencoding()
 
 if system_encoding != "utf-8":
+
     def make_safe(string):
         return string.encode(system_encoding, errors="replace").decode(system_encoding)
+
 else:
+
     def make_safe(string):
         return string
+
 
 class TranscriptionOptions(NamedTuple):
     beam_size: int
@@ -40,6 +44,7 @@ class TranscriptionOptions(NamedTuple):
     vad_min_speech_duration_ms: Optional[int]
     vad_max_speech_duration_s: Optional[int]
     vad_min_silence_duration_ms: Optional[int]
+
 
 class Transcribe:
     @staticmethod

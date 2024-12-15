@@ -1,5 +1,6 @@
 from .transcribe import TranscriptionOptions
 
+
 class WhisperModelConfig:
     model: str = "small"
     threads: int = 0
@@ -23,16 +24,16 @@ class WhisperModelConfig:
         repetition_penalty=1.0,
         no_repeat_ngram_size=0,
         log_prob_threshold=0,
-        no_speech_threshold=.6,
+        no_speech_threshold=0.6,
         compression_ratio_threshold=2.4,
         condition_on_previous_text=True,
-        temperature = [0],
-        prompt_reset_on_temperature=.5,
+        temperature=[0],
+        prompt_reset_on_temperature=0.5,
         initial_prompt=None,
         prefix=None,
         hotwords=None,
         suppress_blank=True,
-        suppress_tokens = [-1],
+        suppress_tokens=[-1],
         word_timestamps=False,
         prepend_punctuations="\"'“¿([{-",
         append_punctuations="\"'.。,，!！?？:：”)]}、",

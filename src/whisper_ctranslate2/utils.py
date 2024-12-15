@@ -22,7 +22,8 @@ MODEL_NAMES = [
     "distil-small.en",
 ]
 
-def validate_model_directory(dir_path: str, download_on_fails: Optional[str]="base"):
+
+def validate_model_directory(dir_path: str, download_on_fails: Optional[str] = "base"):
     if dir_path:
         model_filename = path.join(dir_path, "model.bin")
         if not path.exists(model_filename):
@@ -31,7 +32,9 @@ def validate_model_directory(dir_path: str, download_on_fails: Optional[str]="ba
         model_dir = dir_path
     else:
         if download_on_fails not in MODEL_NAMES:
-            stderr.write(f"Model '{download_on_fails}' is not in the list of available models\n")
+            stderr.write(
+                f"Model '{download_on_fails}' is not in the list of available models\n"
+            )
             return
         model_dir = download_on_fails
     return model_dir
