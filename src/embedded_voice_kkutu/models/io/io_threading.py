@@ -18,6 +18,12 @@ class RecordStruct:
     def __init__(self, record_type: RecordType, data: "RecordData"):
         self.record_type = record_type
         self.data = data
+    
+    def __str__(self):
+        return f"RecordStruct({self.record_type}, {self.data})"
+    
+    def __repr__(self):
+        return self.__str__()
 
 
 class ConcurrencyIO:
@@ -33,25 +39,30 @@ class ConcurrencyIO:
         self.record_result: deque[RecordStruct] = deque()
         self.audio_record_thread: threading.Thread = None
         self.stdin_input_thread: threading.Thread = None
+        self.event = threading.Event()
 
     def start_audio_record(self):
         while True:
             frames: list = self.record_handler.record_until_silence()
             data = frames
+
             if self.audio_record_callback:
                 data = self.audio_record_callback(frames)
 
             self.record_result.append(RecordStruct(RecordType.audio_record, data))
+            self.event.set()
 
     def start_stdin_input(self):
         while True:
             try:
                 gets = input()
                 data = gets
-                if self.record_handler:
-                    self.record_handler(data)
+
+                if self.stdin_input_callback:
+                    data = self.stdin_input_callback(gets)
 
                 self.record_result.append(RecordStruct(RecordType.stdin_string, data))
+                self.event.set()
             except EOFError:
                 break
 
@@ -74,6 +85,7 @@ class ConcurrencyIO:
         self.join_audio_record()
         self.join_stdin_input()
 
-    @property
     def fetch(self):
-        yield self.record_result.popleft()
+        if self.record_result:
+            return self.record_result.popleft()
+        raise IndexError("No record to fetch")

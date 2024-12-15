@@ -1,5 +1,5 @@
-from .runner import invoke_game
-
+from .runner import GameRunner
 
 def app():
-    invoke_game()
+    game = GameRunner()
+    game.run_game()
