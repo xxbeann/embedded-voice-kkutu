@@ -2,6 +2,9 @@ import pyaudio
 from array import array
 from math import sqrt
 import time
+import os
+os.environ["PYTHONWARNINGS"] = "ignore"
+os.environ["ALSA_CARD"] = "default"
 
 
 class RecordHandler:
@@ -44,6 +47,7 @@ class RecordHandler:
             rate=self.RATE,
             input=True,
             frames_per_buffer=self.CHUNK,
+            input_device_index=None,
         )
 
         frames = []
