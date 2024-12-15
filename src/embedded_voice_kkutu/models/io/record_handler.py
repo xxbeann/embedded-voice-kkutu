@@ -3,6 +3,7 @@ from array import array
 from math import sqrt
 import time
 import os
+
 os.environ["PYTHONWARNINGS"] = "ignore"
 os.environ["ALSA_CARD"] = "default"
 
