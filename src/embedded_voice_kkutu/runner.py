@@ -11,19 +11,23 @@ def on_audio_record(frames: List[int]) -> Dict[str, List[int]]:
     return {"frames": frames}
 
 
-def on_stdin_input(input_str: str) -> str:
-    print(input_str)
-    return input_str
 
 
 class GameRunner:
     def __init__(self):
         self.game = WordChainGame()
-        self.io_handler = ConcurrencyIO(self.on_audio_record, on_stdin_input)
+        self.io_handler = ConcurrencyIO(GameRunner.on_audio_record, GameRunner.on_stdin_input)
         self.io_input_event = self.io_handler.event
 
-    def on_audio_record(obj, frames: List[int]):
+    def on_audio_record(data):
+        if DEBUG:
+            print("__DEBUG__/on_audio_record", data)
         return "__오디오 입력__"
+
+    def on_stdin_input(input_str: str) -> str:
+        if DEBUG:
+            print("__DEBUG__/on_stdin_input", input_str)
+        return input_str
 
     def _fetch_input(self) -> str:
         player_word = None
@@ -44,7 +48,7 @@ class GameRunner:
         print("첫 단어를 입력하세요: ", end="", flush=True)
         player_word = self._fetch_input()
         if DEBUG:
-            print("__DEBUG__", player_word)
+            print("__DEBUG__/run_game/on_first_input", player_word)
 
         while True:
             if player_word == "종료":
@@ -56,7 +60,7 @@ class GameRunner:
                 print("유효한 단어가 아닙니다. 다시 입력해주세요.", end="", flush=True)
                 player_word = self._fetch_input()
                 if DEBUG:
-                    print("__DEBUG__", player_word)
+                    print("__DEBUG__/run_game/on_retry", player_word)
                 continue
 
             # 플레이어 단어 등록
@@ -71,4 +75,4 @@ class GameRunner:
             print("단어를 입력하세요: ", flush=True)
             player_word = self._fetch_input()
             if DEBUG:
-                print("__DEBUG__", player_word)
+                print("__DEBUG__/run_game/game_continued", player_word)
