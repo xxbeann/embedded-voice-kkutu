@@ -6,12 +6,15 @@ from threading import Event
 
 DEBUG = True
 
+
 def on_audio_record(frames: List[int]) -> Dict[str, List[int]]:
     return {"frames": frames}
 
-def on_stdin_input(input_str: str) -> str: 
+
+def on_stdin_input(input_str: str) -> str:
     print(input_str)
     return input_str
+
 
 class GameRunner:
     def __init__(self):
@@ -40,8 +43,9 @@ class GameRunner:
         self.io_input_event.clear()  # Reset the event
         print("첫 단어를 입력하세요: ", end="", flush=True)
         player_word = self._fetch_input()
-        if DEBUG: print('__DEBUG__', player_word)
-        
+        if DEBUG:
+            print("__DEBUG__", player_word)
+
         while True:
             if player_word == "종료":
                 print("게임을 종료합니다!")
@@ -51,7 +55,8 @@ class GameRunner:
             if not self.game.is_valid_word(next_word, player_word):
                 print("유효한 단어가 아닙니다. 다시 입력해주세요.")
                 player_word = self._fetch_input()
-                if DEBUG: print('__DEBUG__', player_word)
+                if DEBUG:
+                    print("__DEBUG__", player_word)
                 continue
 
             # 플레이어 단어 등록
@@ -65,4 +70,5 @@ class GameRunner:
 
             print("단어를 입력하세요: ")
             player_word = self._fetch_input()
-            if DEBUG: print('__DEBUG__', player_word)
+            if DEBUG:
+                print("__DEBUG__", player_word)
