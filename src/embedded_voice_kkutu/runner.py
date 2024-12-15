@@ -11,12 +11,12 @@ def on_audio_record(frames: List[int]) -> Dict[str, List[int]]:
     return {"frames": frames}
 
 
-
-
 class GameRunner:
     def __init__(self):
         self.game = WordChainGame()
-        self.io_handler = ConcurrencyIO(GameRunner.on_audio_record, GameRunner.on_stdin_input)
+        self.io_handler = ConcurrencyIO(
+            GameRunner.on_audio_record, GameRunner.on_stdin_input
+        )
         self.io_input_event = self.io_handler.event
 
     def on_audio_record(data):
