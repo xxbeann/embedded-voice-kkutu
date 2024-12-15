@@ -17,9 +17,6 @@ dependencies = [
     "playsound==1.2.2",
     "pygame>=2.6.1",
     "whisper>=1.1.10",
-    "torch==2.5.1+cpu",
-    "torchvision==0.20.1+cpu",
-    "torchaudio==2.5.1+cpu",
     "openai-whisper>=20240930",
 ]
 readme = "README.md"
