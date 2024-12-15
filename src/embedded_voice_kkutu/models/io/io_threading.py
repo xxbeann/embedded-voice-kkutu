@@ -18,10 +18,10 @@ class RecordStruct:
     def __init__(self, record_type: RecordType, data: "RecordData"):
         self.record_type = record_type
         self.data = data
-    
+
     def __str__(self):
         return f"RecordStruct({self.record_type}, {self.data})"
-    
+
     def __repr__(self):
         return self.__str__()
 
