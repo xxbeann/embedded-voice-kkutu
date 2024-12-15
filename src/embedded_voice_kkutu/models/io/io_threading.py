@@ -40,9 +40,10 @@ class ConcurrencyIO:
         self.audio_record_thread: threading.Thread = None
         self.stdin_input_thread: threading.Thread = None
         self.event = threading.Event()
+        self.close_event = threading.Event()
 
     def start_audio_record(self):
-        while True:
+        while not self.close_event.is_set():
             frames: list = self.record_handler.record_until_silence()
             data = frames
 
@@ -53,7 +54,7 @@ class ConcurrencyIO:
             self.event.set()
 
     def start_stdin_input(self):
-        while True:
+        while not self.close_event.is_set():
             try:
                 gets = input()
                 data = gets

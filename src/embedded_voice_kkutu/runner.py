@@ -53,7 +53,9 @@ class GameRunner:
         while True:
             if player_word == "종료":
                 print("게임을 종료합니다!")
-                break
+                self.io_handler.close_event.set()
+                self.io_handler.join_io()
+                exit(0)
 
             # 플레이어 입력 단어가 유효한지 확인
             if not self.game.is_valid_word(next_word, player_word):
