@@ -1,5 +1,7 @@
 # Voice KKuTu
 
+[![Hugging Face: ShapeLayer/embedded-voice-kkutu-models](https://img.shields.io/badge/%F0%9F%A4%97-ShapeLayer%2fembedded--voice--kkutu--models-yellow)](https://huggingface.co/ShapeLayer/embedded-voice-kkutu-models)
+
 Voice KKuTu - Team Project for Embedded Software Lecture
 
 ## Getting Started
@@ -17,6 +19,12 @@ rye sync
 # Convert word database from KKuTu DB
 rye run convert
 
+# Download and convert whisper model
+rye run make-model
+```
+
+**When you clone for developing:**
+```sh
 # Install pre commit script for linting
 rye run pre-commit
 ```
@@ -30,6 +38,7 @@ rye run convert
 rye run clean
 rye run black
 rye run pre-commit
+rye run make-model
 ```
 
 ### Convert word data from KKuTu DB
@@ -42,6 +51,48 @@ git submodule init
 git submodule update
 rye run convert
 ```
+
+### Download and convert Whisper model or just download from Hugging Face
+
+```sh
+rye run make-model
+rye run make-model --model-size=model
+```
+
+There are converted model at Hugging Face. You can run application just downloading models from there.
+
+```sh
+git lfs install
+git clone https://huggingface.co/ShapeLayer/embedded-voice-kkutu-models models
+GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/ShapeLayer/embedded-voice-kkutu-models
+```
+
+> [!NOTE]
+> If you use a model other than the default model, you must pass parameters while running the app.
+
+```sh
+rye run app --model=model
+```
+
+| Model | `model` value |
+| :-: | :-: |
+| Tiny | `tiny` |
+| (en) Tiny | `tiny.en` |
+| Base | `base` |
+| (en) Base | `base.en` |
+| Small | `small` |
+| (en) Small | `small.en` |
+| Medium | `medium` |
+| (en) Medium | `medium.en` |
+| Large-v1 | `large-v1` |
+| Large-v2 | `large-v2` |
+| Large-v3 | `large-v3` |
+| Large-v3-turbo | `large-v3-turbo` |
+| Turbo | `turbo` |
+| Distil-large-v2 | `distil-large-v2` |
+| Distil-large-v3 | `distil-large-v3` |
+| (en) Distil-medium | `distil-medium.en` |
+| (en) Distil-small | `distil-small.en` |
 
 ## Troubleshooting
 
