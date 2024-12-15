@@ -59,7 +59,7 @@ rye run make-model
 rye run make-model --model-size=model
 ```
 
-There are converted model at Hugging Face. You can run application just downloading models from there.
+There are converted model at [Hugging Face](https://huggingface.co/ShapeLayer/embedded-voice-kkutu-models). You can run application just downloading models from there.
 
 ```sh
 git lfs install
