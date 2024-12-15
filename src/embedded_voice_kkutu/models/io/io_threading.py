@@ -2,7 +2,9 @@ from typing import Callable, TypeVar, Union
 from enum import Enum
 import threading
 from collections import deque
+import numpy as np
 
+import whisper_ctranslate2 as wc2
 from .record_handler import RecordHandler
 
 T = TypeVar("T")
@@ -42,13 +44,43 @@ class ConcurrencyIO:
         self.event = threading.Event()
         self.close_event = threading.Event()
 
+        model_dir = wc2.validate_model_directory(wc2.wmc.model_directory)
+        self.transcribe = wc2.Transcribe(
+            model_dir,
+            wc2.wmc.device,
+            wc2.wmc.device_index,
+            wc2.wmc.compute_type,
+            wc2.wmc.threads,
+            wc2.wmc.cache_directory,
+            wc2.wmc.local_files_only,
+            wc2.wmc.batched,
+            wc2.wmc.batch_size,
+        )
+
     def start_audio_record(self):
         while not self.close_event.is_set():
             frames: list = self.record_handler.record_until_silence()
-            data = frames
-
-            if self.audio_record_callback:
+            
+            audio_data = np.frombuffer(b''.join(frames), dtype=np.int16)
+            audio_data = audio_data.astype(np.float32)
+            if len(audio_data) > 0:
+                audio_data = audio_data / 32768.0
+            
+            data = self.transcribe.inference(
+                audio_data,
+                wc2.wmc.task,
+                wc2.wmc.language,
+                wc2.wmc.options,
+            )
+            
+            if self.audio_record_callback and False:
                 data = self.audio_record_callback(frames)
+
+            if 'text' not in data:
+                continue
+            if data['text'] == "":
+                continue
+            data = data['text'].replace(' ', '')
 
             self.record_result.append(RecordStruct(RecordType.audio_record, data))
             self.event.set()

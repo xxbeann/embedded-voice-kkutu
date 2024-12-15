@@ -10,6 +10,8 @@
 #   universal: false
 
 -e file:.
+av==14.0.1
+    # via faster-whisper
 black==24.10.0
     # via embedded-voice-kkutu
 certifi==2022.12.7
@@ -23,27 +25,38 @@ charset-normalizer==2.1.1
 click==8.1.7
     # via black
     # via gtts
-colorama==0.4.6
-    # via click
-    # via pytest
-    # via tqdm
+coloredlogs==15.0.1
+    # via onnxruntime
 contourpy==1.3.1
     # via matplotlib
+ctranslate2==4.5.0
+    # via faster-whisper
 cycler==0.12.1
     # via matplotlib
 distlib==0.3.9
     # via virtualenv
 exceptiongroup==1.2.2
     # via pytest
+faster-whisper==1.1.0
+    # via embedded-voice-kkutu
 filelock==3.13.1
+    # via huggingface-hub
     # via torch
     # via virtualenv
+flatbuffers==24.3.25
+    # via onnxruntime
 fonttools==4.55.3
     # via matplotlib
 fsspec==2024.2.0
+    # via huggingface-hub
     # via torch
 gtts==2.5.4
     # via embedded-voice-kkutu
+huggingface-hub==0.26.5
+    # via faster-whisper
+    # via tokenizers
+humanfriendly==10.0
+    # via coloredlogs
 identify==2.6.3
     # via pre-commit
 idna==3.4
@@ -60,7 +73,7 @@ llvmlite==0.43.0
     # via numba
 markupsafe==2.1.5
     # via jinja2
-matplotlib==3.9.4
+matplotlib==3.10.0
     # via noisereduce
 more-itertools==10.5.0
     # via openai-whisper
@@ -78,16 +91,22 @@ numba==0.60.0
     # via openai-whisper
 numpy==1.26.3
     # via contourpy
+    # via ctranslate2
     # via matplotlib
     # via noisereduce
     # via numba
+    # via onnxruntime
     # via openai-whisper
     # via scipy
+onnxruntime==1.20.1
+    # via faster-whisper
 openai-whisper==20240930
     # via embedded-voice-kkutu
 packaging==24.1
     # via black
+    # via huggingface-hub
     # via matplotlib
+    # via onnxruntime
     # via pytest
 pathspec==0.12.1
     # via black
@@ -102,6 +121,8 @@ pluggy==1.5.0
     # via pytest
 pre-commit==4.0.1
     # via embedded-voice-kkutu
+protobuf==5.29.1
+    # via onnxruntime
 pyaudio==0.2.14
     # via embedded-voice-kkutu
 pycparser==2.22
@@ -116,15 +137,20 @@ pytest==8.3.4
 python-dateutil==2.9.0.post0
     # via matplotlib
 pyyaml==6.0.2
+    # via ctranslate2
+    # via huggingface-hub
     # via pre-commit
 regex==2024.11.6
     # via tiktoken
 requests==2.28.1
     # via gtts
+    # via huggingface-hub
     # via tiktoken
     # via vosk
 scipy==1.14.1
     # via noisereduce
+setuptools==70.0.0
+    # via ctranslate2
 six==1.17.0
     # via python-dateutil
     # via whisper
@@ -133,27 +159,33 @@ speechrecognition==3.12.0
 srt==3.5.3
     # via vosk
 sympy==1.13.1
+    # via onnxruntime
     # via torch
 tiktoken==0.8.0
     # via openai-whisper
+tokenizers==0.21.0
+    # via faster-whisper
 tomli==2.2.1
     # via black
     # via pytest
-torch==2.5.1+cpu
+torch==2.5.1
     # via openai-whisper
 tqdm==4.66.5
+    # via faster-whisper
+    # via huggingface-hub
     # via noisereduce
     # via openai-whisper
     # via vosk
 typing-extensions==4.9.0
     # via black
+    # via huggingface-hub
     # via speechrecognition
     # via torch
 urllib3==1.26.13
     # via requests
 virtualenv==20.28.0
     # via pre-commit
-vosk==0.3.45
+vosk==0.3.44
     # via embedded-voice-kkutu
 websockets==14.1
     # via vosk

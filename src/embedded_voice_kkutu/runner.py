@@ -20,6 +20,7 @@ class GameRunner:
         self.io_input_event = self.io_handler.event
 
     def on_audio_record(data):
+        print(data)
         if DEBUG:
             print("__DEBUG__/on_audio_record", data)
         return "__오디오 입력__"
