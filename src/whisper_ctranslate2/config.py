@@ -2,13 +2,15 @@ from .transcribe import TranscriptionOptions
 
 
 class WhisperModelConfig:
-    model: str = "small"
     threads: int = 0
     language: str = "ko"
     task: str = "transcribe"
     device: str = "cpu"
     compute_type: str = "int8"
+
+    # WARNING: THIS VALUE CAN BE CHANGED BY `/src/embedded_voice_kkutu/__init__.py`
     model_directory: str = "models/whisper-base-ct2"
+
     cache_directory: str = None
     device_index: int = 0
     audio: str = "realtime_audio.wav"

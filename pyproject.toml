@@ -19,6 +19,7 @@ dependencies = [
     "whisper>=1.1.10",
     "openai-whisper>=20240930",
     "faster-whisper>=1.1.0",
+    "transformers>=4.47.0",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"
@@ -27,6 +28,7 @@ requires-python = ">= 3.8"
 app = "embedded_voice_kkutu:app"
 convert = "embedded_voice_kkutu_utils:convert"
 clean = "embedded_voice_kkutu_utils:clean"
+make-model = "whisper_ctranslate2_utils:convert_main"
 
 [build-system]
 requires = ["hatchling"]
