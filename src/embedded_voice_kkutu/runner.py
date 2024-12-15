@@ -49,7 +49,7 @@ class GameRunner:
 
             # 플레이어 입력 단어가 유효한지 확인
             if not self.game.is_valid_word(next_word, player_word):
-                print("유효한 단어가 아닙니다. 다시 입력해주세요.")
+                print("유효한 단어가 아닙니다. 다시 입력해주세요.", end="", flush=True)
                 player_word = self._fetch_input()
                 if DEBUG: print('__DEBUG__', player_word)
                 continue
@@ -60,9 +60,9 @@ class GameRunner:
             # 컴퓨터 응답
             next_word = self.game.play_turn(player_word)
             if next_word is None:
-                print("축하합니다! 당신이 이겼어용!!")
+                print("축하합니다! 당신이 이겼어용!!", flush=True)
                 break
 
-            print("단어를 입력하세요: ")
+            print("단어를 입력하세요: ", flush=True)
             player_word = self._fetch_input()
             if DEBUG: print('__DEBUG__', player_word)
