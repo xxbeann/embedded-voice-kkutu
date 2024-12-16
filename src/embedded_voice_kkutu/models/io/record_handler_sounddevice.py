@@ -23,7 +23,9 @@ class RecordHandler:
 
     def __init__(self):
         self.frames = []
-        self.previous_frames = deque(maxlen=int(self.RATE * self.RECORD_PREVIOUS_TEMP_TIME))
+        self.previous_frames = deque(
+            maxlen=int(self.RATE * self.RECORD_PREVIOUS_TEMP_TIME)
+        )
         self.silent_chunks = 0
         self.is_speaking = False
         self.initial_silence_start = None
@@ -33,8 +35,8 @@ class RecordHandler:
 
     def audio_callback(self, indata, frames, _time, status):
         if status:
-            print(f'Error: {status}')
-            
+            print(f"Error: {status}")
+
         audio_data = indata[:, 0]
         rms = self.calculate_rms(audio_data)
 
@@ -70,7 +72,7 @@ class RecordHandler:
             channels=self.CHANNELS,
             samplerate=self.RATE,
             blocksize=self.CHUNK,
-            callback=self.audio_callback
+            callback=self.audio_callback,
         ):
             while self.recording:
                 sd.sleep(100)
@@ -81,6 +83,7 @@ class RecordHandler:
         if len(data) == 0:
             return 0
         return np.sqrt(np.mean(np.square(data)))
+
 
 if __name__ == "__main__":
     record_handler = RecordHandler()

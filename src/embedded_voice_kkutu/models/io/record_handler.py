@@ -25,8 +25,8 @@ class RecordHandler:
     RECORD_PREVIOUS_TEMP_TIME = 0.5  # 이전 녹음 시간
 
     def __init__(self):
-        # print('RecordHandler initialized with pyaudio')
         return
+        # print("RecordHandler initialized with pyaudio")
 
     def calculate_rms(self, data):
         """RMS 에너지 계산: 데이터의 평균 에너지를 계산"""

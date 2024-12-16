@@ -3,10 +3,16 @@ import argparse
 from whisper_ctranslate2 import wmc
 from embedded_voice_kkutu.models.io import RecordLibrary
 
+
 def app():
     parser = argparse.ArgumentParser(description="Run the embedded voice kkutu game")
     parser.add_argument("--model", default="base", help="Model size to convert")
-    parser.add_argument("--record-engine", default="pyaudio", choices=["pyaudio", "sounddevice"], help="Record engine to use")
+    parser.add_argument(
+        "--record-engine",
+        default="pyaudio",
+        choices=["pyaudio", "sounddevice"],
+        help="Record engine to use",
+    )
     parser.add_argument(
         "--disable-voice", action="store_true", help="Disable voice recognition"
     )
