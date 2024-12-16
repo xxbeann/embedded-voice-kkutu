@@ -1,7 +1,7 @@
 import json
 from typing import Dict, List, Set
 from .service.game_service import WordChainGame
-from .models.io import ConcurrencyIO
+from .models.io import ConcurrencyIO, RecordLibrary
 from threading import Event
 
 DEBUG = True
@@ -12,10 +12,13 @@ def on_audio_record(frames: List[int]) -> Dict[str, List[int]]:
 
 
 class GameRunner:
-    def __init__(self):
+    def __init__(
+        self,
+        record_library: RecordLibrary = RecordLibrary.pyaudio,
+    ):
         self.game = WordChainGame()
         self.io_handler = ConcurrencyIO(
-            GameRunner.on_audio_record, GameRunner.on_stdin_input
+            GameRunner.on_audio_record, GameRunner.on_stdin_input, record_library
         )
         self.io_input_event = self.io_handler.event
 
@@ -40,11 +43,13 @@ class GameRunner:
                 continue
         return player_word
 
-    def run_game(self) -> None:
+    def run_game(
+        self, disable_voice: bool = False, disable_stdin: bool = False
+    ) -> None:
         next_word = None
 
         print("끝말잇기를 시작합니다! 게임을 종료하려면 '종료'를 입력하세요.")
-        self.io_handler.start_io()  # Start the IO threads
+        self.io_handler.start_io(disable_voice, disable_stdin)  # Start the IO threads
         self.io_input_event.clear()  # Reset the event
         print("첫 단어를 입력하세요: ", end="", flush=True)
         player_word = self._fetch_input()

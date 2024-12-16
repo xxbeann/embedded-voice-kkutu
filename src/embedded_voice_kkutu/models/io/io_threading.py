@@ -6,6 +6,7 @@ import numpy as np
 
 import whisper_ctranslate2 as wc2
 from .record_handler import RecordHandler
+from .record_handler_sounddevice import RecordHandler as RecordHandlerSounddevice
 
 T = TypeVar("T")
 RecordData = Union[list, str]
@@ -28,16 +29,27 @@ class RecordStruct:
         return self.__str__()
 
 
+class RecordLibrary(Enum):
+    sounddevice = "sounddevice"
+    pyaudio = "pyaudio"
+
+
 class ConcurrencyIO:
     def __init__(
         self,
         audio_record_callback: Callable[list, T],
         stdin_input_callback: Callable[str, str],
+        record_library: RecordLibrary = RecordLibrary.pyaudio,
     ):
         # Type T in `audio_record_callback` will be decided when type of model's input.
         self.audio_record_callback = audio_record_callback
         self.stdin_input_callback = stdin_input_callback
-        self.record_handler = RecordHandler()
+        if record_library == RecordLibrary.pyaudio:
+            self.record_handler = RecordHandler()
+        elif record_library == RecordLibrary.sounddevice:
+            self.record_handler = RecordHandlerSounddevice()  # RecordHandler()
+        else:
+            self.record_handler = RecordHandler()
         self.record_result: deque[RecordStruct] = deque()
         self.audio_record_thread: threading.Thread = None
         self.stdin_input_thread: threading.Thread = None
@@ -59,12 +71,7 @@ class ConcurrencyIO:
 
     def start_audio_record(self):
         while not self.close_event.is_set():
-            frames: list = self.record_handler.record_until_silence()
-
-            audio_data = np.frombuffer(b"".join(frames), dtype=np.int16)
-            audio_data = audio_data.astype(np.float32)
-            if len(audio_data) > 0:
-                audio_data = audio_data / 32768.0
+            audio_data = self.record_handler.record_until_silence()
 
             data = self.transcribe.inference(
                 audio_data,
@@ -80,7 +87,12 @@ class ConcurrencyIO:
                 continue
             if data["text"] == "":
                 continue
-            data = data["text"].replace(" ", "")
+
+            strbuf = []
+            for each in data["text"]:
+                if 44032 <= ord(each) <= 55203:
+                    strbuf.append(each)
+            data = "".join(strbuf)
 
             self.record_result.append(RecordStruct(RecordType.audio_record, data))
             self.event.set()
@@ -107,12 +119,13 @@ class ConcurrencyIO:
         if self.stdin_input_thread:
             self.stdin_input_thread.join()
 
-    def start_io(self):
-        self.audio_record_thread = threading.Thread(target=self.start_audio_record)
-        self.stdin_input_thread = threading.Thread(target=self.start_stdin_input)
-
-        self.audio_record_thread.start()
-        self.stdin_input_thread.start()
+    def start_io(self, disable_voice: bool = False, disable_stdin: bool = False):
+        if not disable_voice:
+            self.audio_record_thread = threading.Thread(target=self.start_audio_record)
+            self.audio_record_thread.start()
+        if not disable_stdin:
+            self.stdin_input_thread = threading.Thread(target=self.start_stdin_input)
+            self.stdin_input_thread.start()
 
     def join_io(self):
         self.join_audio_record()

@@ -64,7 +64,6 @@ There are converted model at [Hugging Face](https://huggingface.co/ShapeLayer/em
 ```sh
 git lfs install
 git clone https://huggingface.co/ShapeLayer/embedded-voice-kkutu-models models
-GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/ShapeLayer/embedded-voice-kkutu-models
 ```
 
 > [!NOTE]
