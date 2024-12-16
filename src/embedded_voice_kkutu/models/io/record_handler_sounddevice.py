@@ -76,7 +76,7 @@ class RecordHandler:
             while self.recording:
                 sd.sleep(100)
 
-        audio_data = np.array(self.frames)
+        audio_data = np.array(self.frames, dtype=np.float32)
         if len(audio_data) > 0:
             audio_data = audio_data / np.max(np.abs(audio_data))
 
