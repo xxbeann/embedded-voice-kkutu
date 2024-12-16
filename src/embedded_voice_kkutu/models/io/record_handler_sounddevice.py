@@ -11,6 +11,7 @@ os.environ["ALSA_CARD"] = "default"
 
 is_adjust_mode = bool("ADJUST_MODE" in os.environ and os.environ["ADJUST_MODE"])
 
+
 class RecordHandler:
     CHUNK = 1024
     CHANNELS = 1
