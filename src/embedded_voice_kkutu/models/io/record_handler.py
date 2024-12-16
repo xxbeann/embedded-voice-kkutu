@@ -126,7 +126,11 @@ class RecordHandler:
             wf.close()
 
         p.terminate()
-        return frames
+        audio_buf = np.frombuffer(b"".join(frames), dtype=np.int16)
+        audio_buf = audio_buf.astype(np.float32)
+        if len(audio_buf) > 0:
+            audio_buf = audio_buf / 32768.0
+        return audio_buf
 
 
 if __name__ == "__main__":

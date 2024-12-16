@@ -71,12 +71,7 @@ class ConcurrencyIO:
 
     def start_audio_record(self):
         while not self.close_event.is_set():
-            frames: list = self.record_handler.record_until_silence()
-
-            audio_data = np.frombuffer(b"".join(frames), dtype=np.int16)
-            audio_data = audio_data.astype(np.float32)
-            if len(audio_data) > 0:
-                audio_data = audio_data / 32768.0
+            audio_data = self.record_handler.record_until_silence()
 
             data = self.transcribe.inference(
                 audio_data,
