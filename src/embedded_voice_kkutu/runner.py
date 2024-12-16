@@ -43,7 +43,9 @@ class GameRunner:
                 continue
         return player_word
 
-    def run_game(self, disable_voice: bool=False, disable_stdin: bool=False) -> None:
+    def run_game(
+        self, disable_voice: bool = False, disable_stdin: bool = False
+    ) -> None:
         next_word = None
 
         print("끝말잇기를 시작합니다! 게임을 종료하려면 '종료'를 입력하세요.")
