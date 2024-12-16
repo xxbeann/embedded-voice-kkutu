@@ -87,7 +87,7 @@ class ConcurrencyIO:
                 continue
             if data["text"] == "":
                 continue
-            
+
             strbuf = []
             for each in data["text"]:
                 if 44032 <= ord(each) <= 55203:
