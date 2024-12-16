@@ -87,7 +87,12 @@ class ConcurrencyIO:
                 continue
             if data["text"] == "":
                 continue
-            data = data["text"].replace(" ", "")
+            
+            strbuf = []
+            for each in data["text"]:
+                if 44032 <= ord(each) <= 55203:
+                    strbuf.append(each)
+            data = "".join(strbuf)
 
             self.record_result.append(RecordStruct(RecordType.audio_record, data))
             self.event.set()
