@@ -62,7 +62,10 @@ def load_from_buffer(model=wmc.model_directory, filename=wmc.audio):
     )
     return result
 
+
 import argparse
+
+
 def main():
     parser = argparse.ArgumentParser(description="Run the embedded voice kkutu game")
     parser.add_argument("--model", default="base", help="Model size to convert")
@@ -76,6 +79,7 @@ def main():
         print(load_from_file(model_path, args.filename))
     else:
         print(load_from_buffer(model_path, args.filename))
+
 
 if __name__ == "__main__":
     # load_from_file()
