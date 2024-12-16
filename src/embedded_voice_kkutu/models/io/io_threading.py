@@ -28,9 +28,11 @@ class RecordStruct:
     def __repr__(self):
         return self.__str__()
 
+
 class RecordLibrary(Enum):
     sounddevice = "sounddevice"
     pyaudio = "pyaudio"
+
 
 class ConcurrencyIO:
     def __init__(
@@ -45,7 +47,7 @@ class ConcurrencyIO:
         if record_library == RecordLibrary.pyaudio:
             self.record_handler = RecordHandler()
         elif record_library == RecordLibrary.sounddevice:
-            self.record_handler = RecordHandlerSounddevice() # RecordHandler()
+            self.record_handler = RecordHandlerSounddevice()  # RecordHandler()
         else:
             self.record_handler = RecordHandler()
         self.record_result: deque[RecordStruct] = deque()

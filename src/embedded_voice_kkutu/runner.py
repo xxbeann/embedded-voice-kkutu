@@ -13,9 +13,9 @@ def on_audio_record(frames: List[int]) -> Dict[str, List[int]]:
 
 class GameRunner:
     def __init__(
-            self,
-            record_library: RecordLibrary = RecordLibrary.pyaudio,
-        ):
+        self,
+        record_library: RecordLibrary = RecordLibrary.pyaudio,
+    ):
         self.game = WordChainGame()
         self.io_handler = ConcurrencyIO(
             GameRunner.on_audio_record, GameRunner.on_stdin_input, record_library
