@@ -17,6 +17,7 @@ black==24.10.0
 certifi==2022.12.7
     # via requests
 cffi==1.17.1
+    # via sounddevice
     # via vosk
 cfgv==3.4.0
     # via pre-commit
@@ -155,6 +156,8 @@ setuptools==70.0.0
 six==1.17.0
     # via python-dateutil
     # via whisper
+sounddevice==0.5.1
+    # via embedded-voice-kkutu
 speechrecognition==3.12.0
     # via embedded-voice-kkutu
 srt==3.5.3

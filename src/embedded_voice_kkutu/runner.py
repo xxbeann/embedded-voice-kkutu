@@ -1,7 +1,7 @@
 import json
 from typing import Dict, List, Set
 from .service.game_service import WordChainGame
-from .models.io import ConcurrencyIO
+from .models.io import ConcurrencyIO, RecordLibrary
 from threading import Event
 
 DEBUG = True
@@ -12,10 +12,13 @@ def on_audio_record(frames: List[int]) -> Dict[str, List[int]]:
 
 
 class GameRunner:
-    def __init__(self):
+    def __init__(
+            self,
+            record_library: RecordLibrary = RecordLibrary.pyaudio,
+        ):
         self.game = WordChainGame()
         self.io_handler = ConcurrencyIO(
-            GameRunner.on_audio_record, GameRunner.on_stdin_input
+            GameRunner.on_audio_record, GameRunner.on_stdin_input, record_library
         )
         self.io_input_event = self.io_handler.event
 

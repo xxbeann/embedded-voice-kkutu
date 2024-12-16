@@ -24,6 +24,9 @@ class RecordHandler:
     INITIAL_SILENCE_DURATION = 5  # 초기 무음 허용 시간 (초)
     RECORD_PREVIOUS_TEMP_TIME = 0.5  # 이전 녹음 시간
 
+    def __init__(self):
+        print('RecordHandler initialized with pyaudio')
+
     def calculate_rms(self, data):
         """RMS 에너지 계산: 데이터의 평균 에너지를 계산"""
         if len(data) == 0:

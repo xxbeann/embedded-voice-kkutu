@@ -6,6 +6,7 @@ import numpy as np
 
 import whisper_ctranslate2 as wc2
 from .record_handler import RecordHandler
+from .record_handler_sounddevice import RecordHandler as RecordHandlerSounddevice
 
 T = TypeVar("T")
 RecordData = Union[list, str]
@@ -27,17 +28,26 @@ class RecordStruct:
     def __repr__(self):
         return self.__str__()
 
+class RecordLibrary(Enum):
+    sounddevice = "sounddevice"
+    pyaudio = "pyaudio"
 
 class ConcurrencyIO:
     def __init__(
         self,
         audio_record_callback: Callable[list, T],
         stdin_input_callback: Callable[str, str],
+        record_library: RecordLibrary = RecordLibrary.pyaudio,
     ):
         # Type T in `audio_record_callback` will be decided when type of model's input.
         self.audio_record_callback = audio_record_callback
         self.stdin_input_callback = stdin_input_callback
-        self.record_handler = RecordHandler()
+        if record_library == RecordLibrary.pyaudio:
+            self.record_handler = RecordHandler()
+        elif record_library == RecordLibrary.sounddevice:
+            self.record_handler = RecordHandlerSounddevice() # RecordHandler()
+        else:
+            self.record_handler = RecordHandler()
         self.record_result: deque[RecordStruct] = deque()
         self.audio_record_thread: threading.Thread = None
         self.stdin_input_thread: threading.Thread = None
