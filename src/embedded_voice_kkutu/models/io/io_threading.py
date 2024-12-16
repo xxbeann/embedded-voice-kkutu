@@ -107,12 +107,13 @@ class ConcurrencyIO:
         if self.stdin_input_thread:
             self.stdin_input_thread.join()
 
-    def start_io(self):
-        self.audio_record_thread = threading.Thread(target=self.start_audio_record)
-        self.stdin_input_thread = threading.Thread(target=self.start_stdin_input)
-
-        self.audio_record_thread.start()
-        self.stdin_input_thread.start()
+    def start_io(self, disable_voice: bool = False, disable_stdin: bool = False):
+        if not disable_voice:
+            self.audio_record_thread = threading.Thread(target=self.start_audio_record)
+            self.audio_record_thread.start()
+        if not disable_stdin:
+            self.stdin_input_thread = threading.Thread(target=self.start_stdin_input)
+            self.stdin_input_thread.start()
 
     def join_io(self):
         self.join_audio_record()

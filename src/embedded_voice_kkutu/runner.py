@@ -40,11 +40,11 @@ class GameRunner:
                 continue
         return player_word
 
-    def run_game(self) -> None:
+    def run_game(self, disable_voice: bool=False, disable_stdin: bool=False) -> None:
         next_word = None
 
         print("끝말잇기를 시작합니다! 게임을 종료하려면 '종료'를 입력하세요.")
-        self.io_handler.start_io()  # Start the IO threads
+        self.io_handler.start_io(disable_voice, disable_stdin)  # Start the IO threads
         self.io_input_event.clear()  # Reset the event
         print("첫 단어를 입력하세요: ", end="", flush=True)
         player_word = self._fetch_input()

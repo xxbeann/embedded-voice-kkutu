@@ -6,8 +6,8 @@ from .config import WhisperModelConfig as wmc
 from .utils import validate_model_directory
 
 
-def load_from_file():
-    model_dir = validate_model_directory(wmc.model_directory)
+def load_from_file(model=wmc.model_directory, filename=wmc.audio):
+    model_dir = validate_model_directory(model)
 
     transcribe = Transcribe(
         model_dir,
@@ -22,7 +22,7 @@ def load_from_file():
     )
 
     result = transcribe.inference(
-        wmc.audio,
+        filename,
         wmc.task,
         wmc.language,
         wmc.options,
@@ -30,8 +30,8 @@ def load_from_file():
     return result
 
 
-def load_from_buffer():
-    model_dir = validate_model_directory(wmc.model_directory)
+def load_from_buffer(model=wmc.model_directory, filename=wmc.audio):
+    model_dir = validate_model_directory(model)
 
     transcribe = Transcribe(
         model_dir,
@@ -45,7 +45,7 @@ def load_from_buffer():
         wmc.batch_size,
     )
 
-    with wave.open(wmc.audio, "rb") as wav_file:
+    with wave.open(filename, "rb") as wav_file:
         audio_bytes = wav_file.readframes(wav_file.getnframes())
 
         audio_data = np.frombuffer(audio_bytes, dtype=np.int16)
@@ -62,7 +62,22 @@ def load_from_buffer():
     )
     return result
 
+import argparse
+def main():
+    parser = argparse.ArgumentParser(description="Run the embedded voice kkutu game")
+    parser.add_argument("--model", default="base", help="Model size to convert")
+    parser.add_argument("--load-from-file", action="store_true", help="Load from file")
+    parser.add_argument("--filename", default="audio.wav", help="Filename to load")
+    args = parser.parse_args()
+
+    model_path = f"models/whisper-{args.model}-ct2"
+
+    if args.load_from_file:
+        print(load_from_file(model_path, args.filename))
+    else:
+        print(load_from_buffer(model_path, args.filename))
 
 if __name__ == "__main__":
     # load_from_file()
-    print(load_from_buffer())
+    # print(load_from_buffer())
+    main()
